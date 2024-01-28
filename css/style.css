@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+body {
+    background-color: darkcyan;
+    font-family: Roboto;
+}
+
+header {
+    border-bottom: 4px solid white;
+}
+
+header h1 {
+    color: white;
+    font-size: 4rem;
+    text-align: center;
+    margin: 30px 0;
+}
+
+#book-container {
+    border: 2px solid red;
+    padding-top: 30px;
+    width: 80%;
+    margin: 0 auto;
+
+   
+}
+
+#book-container > * {
+    border: 2px solid white;
+}
+

@@ -2,11 +2,12 @@
 
 const bookContainer = document.querySelector("#book-container");
 
-// remove these later
 const myLibrary = [
-    new Book("The Hobbit", "author", 123, true),
-    new Book("Batman", "author", 234, false),
-    new Book("Joker", "author", 443, true)
+    new Book("The Hobbit", "Author", 123, true),
+    new Book("Batman", "Author", 234, false),
+    new Book("Joker", "Author", 443, true),
+    new Book("Joker", "Author", 443, true),
+    new Book("Joker", "Author", 443, true)
 ];
 
 function Book(title, author, pages, hasRead) {
@@ -36,7 +37,7 @@ function displayLibrary() {
         bookAuthor.textContent = book.author;
         bookAuthor.classList.add("book-author");
 
-        bookPages.textContent = book.pages;
+        bookPages.textContent = `${book.pages} Pages`;
         bookPages.classList.add("book-pages");
 
         bookHasRead.textContent = book.hasRead;

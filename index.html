@@ -12,8 +12,38 @@
         <h1>LIBRARY</h1>
     </header>
 
-    <button type="button" id="add-book">ADD BOOK</button>
+    <button type="button" id="add-book-button">ADD BOOK</button>
 
     <div id="book-container"></div>
+
+    <dialog>
+        <div>ENTER BOOK DETAILS</div>
+        
+        <form action="" id="form" method="dialog">
+          
+            <div class="add-title">
+                <label for="title">TITLE</label>
+                <input type="text" id="title" name="title">
+            </div>
+            <div class="add-author">
+                <label for="author">AUTHOR</label>
+                <input type="text" id="author" name="author">
+            </div>
+            <div class="add-pages">
+                <label for="pages">PAGES</label>
+                <input type="number" id="pages" name="pages">
+            </div>
+            <div class="add-has-read">
+                <label for="has-read">READ?</label>
+                <input type="checkbox" id="has-read" name="has-read">
+            </div>
+            <div class="buttons">
+                <button type="submit" class="submit">ADD BOOK</button>
+                <button type="button" class="cancel">CANCEL</button>
+            </div>
+            
+        </form>
+        
+    </dialog>
 </body>
 </html>

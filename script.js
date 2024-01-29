@@ -1,12 +1,31 @@
 "use strict"
 
 const bookContainer = document.querySelector("#book-container");
+const addBookButton = document.querySelector("#add-book-button");
+const modal = document.querySelector("dialog");
+const cancelFormButton = document.querySelector(".cancel");
+const submitFormButton = document.querySelector(".submit");
+const addBookForm = document.querySelector("form");
+
+addBookButton.addEventListener("click", () => {
+    modal.showModal();
+});
+
+submitFormButton.addEventListener("click", event => {
+    // event.preventDefault();
+    // modal.close();
+    
+    addBookForm.reset();
+});
+
+cancelFormButton.addEventListener("click", () => {
+    modal.close();
+    addBookForm.reset();
+});
 
 const myLibrary = [
     new Book("The Hobbit", "Author", 123, true),
     new Book("Batman", "Author", 234, false),
-    new Book("Joker", "Author", 443, true),
-    new Book("Joker", "Author", 443, true),
     new Book("Joker", "Author", 443, true)
 ];
 

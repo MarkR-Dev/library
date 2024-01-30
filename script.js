@@ -4,7 +4,7 @@ const bookContainer = document.querySelector("#book-container");
 const addBookButton = document.querySelector("#add-book-button");
 const modal = document.querySelector("dialog");
 const cancelFormButton = document.querySelector(".cancel");
-const submitFormButton = document.querySelector(".submit");
+// const submitFormButton = document.querySelector(".submit");
 const addBookForm = document.querySelector("form");
 
 addBookButton.addEventListener("click", () => {
@@ -16,17 +16,30 @@ cancelFormButton.addEventListener("click", () => {
     addBookForm.reset();
 });
 
-submitFormButton.addEventListener("click", event => {
+document.addEventListener("keydown", event => {
+    if(event.key === "Escape"){
+        addBookForm.reset(); 
+    }
+});
+
+addBookForm.addEventListener("submit", event => {
     //event.preventDefault();
     //modal.close();
+
+    const inputTitle = document.querySelector("#title").value;
+    const inputAuthor = document.querySelector("#author").value;
+    const inputPages = document.querySelector("#pages").value;
+    const inputHasRead = document.querySelector("#has-read").checked;
+    
+    addBookToLibrary(inputTitle, inputAuthor, inputPages, inputHasRead);
     
     addBookForm.reset();
 });
 
 const myLibrary = [
-    new Book("The Hobbit", "Author", 123, true),
-    new Book("Batman", "Author", 234, false),
-    new Book("Joker", "Author", 443, true)
+    new Book("The Hobbit", "J. R. R. Tolkien", 368, true),
+    new Book("A Feast for Crows", "George R. R. Martin", 753, false),
+    new Book("1984", "George Orwell", 328, true)
 ];
 
 function Book(title, author, pages, hasRead) {

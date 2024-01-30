@@ -11,15 +11,15 @@ addBookButton.addEventListener("click", () => {
     modal.showModal();
 });
 
-submitFormButton.addEventListener("click", event => {
-    // event.preventDefault();
-    // modal.close();
-    
+cancelFormButton.addEventListener("click", () => {
+    modal.close();
     addBookForm.reset();
 });
 
-cancelFormButton.addEventListener("click", () => {
-    modal.close();
+submitFormButton.addEventListener("click", event => {
+    //event.preventDefault();
+    //modal.close();
+    
     addBookForm.reset();
 });
 
@@ -36,10 +36,15 @@ function Book(title, author, pages, hasRead) {
     this.hasRead = hasRead;
 }
 
-function addBookToLibrary() {
+function addBookToLibrary(title, author, pages, hasRead) {
+    const book = new Book(title, author, pages, hasRead);
+    myLibrary.push(book);
+    displayLibrary();
 }
 
 function displayLibrary() {
+    bookContainer.textContent = "";
+
     myLibrary.forEach(book => {
 
         const bookCard = document.createElement("div");
@@ -71,6 +76,6 @@ function displayLibrary() {
     });
 }
 
-// console.log(myLibrary)
 displayLibrary()
+
 

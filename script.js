@@ -4,7 +4,6 @@ const bookContainer = document.querySelector("#book-container");
 const addBookButton = document.querySelector("#add-book-button");
 const modal = document.querySelector("dialog");
 const cancelFormButton = document.querySelector(".cancel");
-// const submitFormButton = document.querySelector(".submit");
 const addBookForm = document.querySelector("form");
 
 addBookButton.addEventListener("click", () => {
@@ -23,9 +22,6 @@ document.addEventListener("keydown", event => {
 });
 
 addBookForm.addEventListener("submit", event => {
-    //event.preventDefault();
-    //modal.close();
-
     const inputTitle = document.querySelector("#title").value;
     const inputAuthor = document.querySelector("#author").value;
     const inputPages = document.querySelector("#pages").value;
@@ -49,6 +45,20 @@ function Book(title, author, pages, hasRead) {
     this.hasRead = hasRead;
 }
 
+Book.prototype.toggleReadStatus = function(event){
+    this.hasRead = !this.hasRead;
+    
+    if(this.hasRead === true){
+        event.target.textContent = "READ";
+        event.target.classList.add("read");
+        event.target.classList.remove("not-read");
+    }else{
+        event.target.textContent = "NOT READ";
+        event.target.classList.add("not-read");
+        event.target.classList.remove("read");
+    }
+}
+
 function addBookToLibrary(title, author, pages, hasRead) {
     const book = new Book(title, author, pages, hasRead);
     myLibrary.push(book);
@@ -70,7 +80,7 @@ function displayLibrary() {
         const bookTitle = document.createElement("p");
         const bookAuthor = document.createElement("p");
         const bookPages = document.createElement("p");
-        const bookHasRead = document.createElement("p");
+        const bookHasRead = document.createElement("button");
         const removeBookButton = document.createElement("button");
         
         bookCard.classList.add("book-card");
@@ -85,9 +95,30 @@ function displayLibrary() {
         bookPages.textContent = `${book.pages} Pages`;
         bookPages.classList.add("book-pages");
 
-        bookHasRead.textContent = book.hasRead;
-        bookHasRead.classList.add("book-has-read");
+        if(book.hasRead === true){
+            bookHasRead.textContent = "READ";
+            bookHasRead.classList.add("read");
+            bookHasRead.classList.remove("not-read");
+        }else{
+            bookHasRead.textContent = "NOT READ";
+            bookHasRead.classList.add("not-read");
+            bookHasRead.classList.remove("read");
+        }
 
+        // Arrow function is used so that the this context remains as the
+        // book object when calling the toggle method
+        //
+        // bookHasRead.classList.add("book-has-read");
+        // bookHasRead.addEventListener("click", (event) => {
+        //     book.toggleReadStatus(event);
+        // });
+
+        // Bind is used to keep the this context bound to the book obj
+        // when calling the method, an arrow function or closing function
+        // will have also worked
+        bookHasRead.classList.add("book-has-read");
+        bookHasRead.addEventListener("click", book.toggleReadStatus.bind(book));
+        
         removeBookButton.textContent = "REMOVE";
         removeBookButton.classList.add("remove-book");
         removeBookButton.addEventListener("click", removeBookFromLibrary);

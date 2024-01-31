@@ -55,18 +55,26 @@ function addBookToLibrary(title, author, pages, hasRead) {
     displayLibrary();
 }
 
+function removeBookFromLibrary(event){
+    const bookIndex = event.target.parentNode.getAttribute("data-index");
+    myLibrary.splice(bookIndex, 1);
+    displayLibrary();
+}
+
 function displayLibrary() {
     bookContainer.textContent = "";
 
-    myLibrary.forEach(book => {
+    myLibrary.forEach((book, index) => {
 
         const bookCard = document.createElement("div");
         const bookTitle = document.createElement("p");
         const bookAuthor = document.createElement("p");
         const bookPages = document.createElement("p");
         const bookHasRead = document.createElement("p");
+        const removeBookButton = document.createElement("button");
         
         bookCard.classList.add("book-card");
+        bookCard.setAttribute("data-index", index);
 
         bookTitle.textContent = book.title;
         bookTitle.classList.add("book-title");
@@ -80,10 +88,15 @@ function displayLibrary() {
         bookHasRead.textContent = book.hasRead;
         bookHasRead.classList.add("book-has-read");
 
+        removeBookButton.textContent = "REMOVE";
+        removeBookButton.classList.add("remove-book");
+        removeBookButton.addEventListener("click", removeBookFromLibrary);
+
         bookCard.appendChild(bookTitle);
         bookCard.appendChild(bookAuthor);
         bookCard.appendChild(bookPages);
         bookCard.appendChild(bookHasRead);
+        bookCard.appendChild(removeBookButton);
 
         bookContainer.appendChild(bookCard);
     });

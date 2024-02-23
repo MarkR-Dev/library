@@ -32,32 +32,33 @@ addBookForm.addEventListener("submit", event => {
     addBookForm.reset();
 });
 
+class Book {
+    constructor(title, author, pages, hasRead){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.hasRead = hasRead;
+    }
+    toggleReadStatus(event){
+        this.hasRead = !this.hasRead;
+    
+        if(this.hasRead === true){
+            event.target.textContent = "READ";
+            event.target.classList.add("read");
+            event.target.classList.remove("not-read");
+        }else{
+            event.target.textContent = "NOT READ";
+            event.target.classList.add("not-read");
+            event.target.classList.remove("read");
+        } 
+    }
+}
+
 const myLibrary = [
     new Book("The Hobbit", "J. R. R. Tolkien", 368, true),
     new Book("A Feast for Crows", "George R. R. Martin", 753, false),
     new Book("1984", "George Orwell", 328, true)
 ];
-
-function Book(title, author, pages, hasRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.hasRead = hasRead;
-}
-
-Book.prototype.toggleReadStatus = function(event){
-    this.hasRead = !this.hasRead;
-    
-    if(this.hasRead === true){
-        event.target.textContent = "READ";
-        event.target.classList.add("read");
-        event.target.classList.remove("not-read");
-    }else{
-        event.target.textContent = "NOT READ";
-        event.target.classList.add("not-read");
-        event.target.classList.remove("read");
-    }
-}
 
 function addBookToLibrary(title, author, pages, hasRead) {
     const book = new Book(title, author, pages, hasRead);
